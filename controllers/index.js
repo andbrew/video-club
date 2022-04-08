@@ -27,7 +27,7 @@ function login(req, res, next) {
           res.status(200).json({
             message: 'Authorized',
             obj: jwt.sign({
-              exp: Math.floor(Date.now() / 1000) + 60,
+              exp: Math.floor(Date.now() / 1000) + 86400,
               data: user.id
             }, jwtKey)
           });

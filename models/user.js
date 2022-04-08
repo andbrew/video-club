@@ -1,20 +1,25 @@
 const mongoose = require('mongoose');
+const { accessibleRecordsPlugin } = require('@casl/mongoose');
+
+mongoose.plugin(accessibleRecordsPlugin);
 
 const schema = mongoose.Schema({
   _name: String,
   _lastName: String,
   _email: String,
   _password: String,
-  _salt: String
+  _salt: String,
+  _profiles: Array
 });
 
 class User {
-  constructor(name, lastName, email, password, salt) {
+  constructor(name, lastName, email, password, salt, profiles) {
     this._name = name;
     this._lastName = lastName;
     this._email = email;
     this._password = password;
     this._salt = salt;
+    this._profiles = profiles;
   }
 
   get name() {
@@ -50,6 +55,13 @@ class User {
   }
   set salt(salt) {
     this._salt = salt;
+  }
+
+  get profiles() {
+    return this._profiles;
+  }
+  set profiles(profiles) {
+    this._profiles= profiles;
   }
 }
 

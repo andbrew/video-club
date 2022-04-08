@@ -42,7 +42,7 @@ app.use(expressJwt({
   secret: jwtKey,
   algorithms: ['HS256']
 }).unless({
-  path: ['/login']
+  path: ['/login', '/users']
 }));
 
 app.use('/', indexRouter);

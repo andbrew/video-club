@@ -35,6 +35,7 @@ function create (req, res, next) {
   const lastName = req.body.lastName;
   const email = req.body.email;
   const password = req.body.password;
+  const profiles = req.body.profiles;
   async.parallel({
     salt: callback => {
       bcrypt.genSalt(10, callback);
@@ -46,7 +47,8 @@ function create (req, res, next) {
         lastName: lastName,
         email: email,
         password: hash,
-        salt: result.salt
+        salt: result.salt,
+        profiles: profiles
       });
       user.save()
       .then(obj => res.status(200).json({
