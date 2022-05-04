@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
 var expressJwt = require('express-jwt');
+var methodOverride = require('method-override');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -38,12 +39,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(expressJwt({
-  secret: jwtKey,
-  algorithms: ['HS256']
-}).unless({
-  path: ['/login']
-}));
+app.use(methodOverride('_method'));
+// app.use(expressJwt({
+//   secret: jwtKey,
+//   algorithms: ['HS256']
+// }).unless({
+//   path: ['/login']
+// }));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

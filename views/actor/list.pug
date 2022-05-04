@@ -1,27 +1,30 @@
 extends ../layout
 
 block content
-      h1 Listado de actores
-      table
-        thead
-            tr
-                th Nombre
-                th Apellido
-                th
-                    a(href="/actors/add") Nuevo
-        tbody
-            each actor in actors.docs
-                tr
-                    td= actor.name
-                    td= actor.lastName
-                    td
-                        a(href='#') Editar
-                        form(method='POST')
-                            input(type='submit' action=`/actors/${actor.id}?_method=DELETE`)
+  h1 Actors
 
-        a(href="/actors/1") <<
-        if actors.hasPrevPage
-            a(href=`/actors/${actors.prevPage}`) <
-        if actors.hasNextPage
-            a(href=`/actors/${actors.nextPage}`) >
-        a(href=`/actors/${actors.totalPages}`) >>
+  a(href="/actors/add") Add
+
+  table
+    thead
+      tr
+        th Name
+        th Last name
+        th
+    tbody
+      each actor in actors.docs
+        tr
+          td= actor.name
+          td= actor.lastName
+          td
+            form(method='POST' action=`/actors/${actor.id}?_method=DELETE`)
+              input(type='submit')
+          td
+            a(href=`/actors/update/${actor.id}`) Edit
+
+  a(href="/actors/1") << &Tab;
+  if actors.hasPrevPage
+    a(href=`/actors/${actors.prevPage}`) <  &Tab;
+  if actors.hasNextPage
+    a(href=`/actors/${actors.nextPage}`) >  &Tab;
+  a(href=`/actors/${actors.totalPages}`) >>  &Tab;

@@ -2,7 +2,7 @@ extends ../layout
 
 block content
   h1 Actor
-  form(method='POST' action='/actors')
+  form(method='POST' action='?_method=PUT')
     label Name
     input(type='text' name='name')
 
